@@ -26,6 +26,7 @@ for(var i = 0; i < 12; i++) {
 }
 
 const prompt = require('prompt-sync')({sigint: true});
+var colors = require('colors');
 
 while(true) {
     var randomKey = Math.floor(Math.random() * 12);
@@ -40,8 +41,8 @@ while(true) {
     const userAnswer = prompt(promptString);
 
     if(userAnswer === correctAnswer) {
-        console.log("Correct!");
+        console.log("Correct!".green);
     } else {
-        console.log("Wrong! It's " + correctAnswer);
+        console.log(("Wrong! It's " + correctAnswer).red);
     }
 }
