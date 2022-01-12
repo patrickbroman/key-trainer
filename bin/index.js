@@ -73,7 +73,7 @@ if(mode === "chords") {
 } else if(mode == "scales") {
     while(true) {
         var randomKey = Math.floor(Math.random() * 12);
-        var randomNote = Math.floor(Math.random() * 7);
+        var randomNote = Math.floor(Math.random() * 12);
 
         var promptString = 
             "What is the " + 
