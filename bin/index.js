@@ -51,6 +51,9 @@ if(process.argv.length > 2) {
 
 console.log(mode.magenta);
 
+var numQuestions = 0;
+var numCorrectAnswers = 0;
+
 if(mode === "chords") {
     while(true) {
         var randomKey = Math.floor(Math.random() * 12);
@@ -62,13 +65,18 @@ if(mode === "chords") {
             " of " + keyNames[randomKey]+ "? : ";
         
         var correctAnswer = majorScales[randomKey][randomChord];
-        const userAnswer = prompt(promptString.yellow);
+        const userAnswer = prompt(promptString.brightYellow);
 
-        if(userAnswer === correctAnswer) {
-            console.log("Correct!".green);
+        if(userAnswer === "exit") {
+            console.log("\nYou got " + numCorrectAnswers + " / " + numQuestions + "!");
+            process.exit();
+        } else if(userAnswer === correctAnswer) {
+            console.log("Correct!".brightGreen);
+            numCorrectAnswers++;
         } else {
-            console.log(("Wrong! It's " + correctAnswer).red);
+            console.log(("Wrong! It's " + correctAnswer).brightRed);
         }
+        numQuestions++;
     }
 } else if(mode == "scales") {
     while(true) {
@@ -81,13 +89,17 @@ if(mode === "chords") {
             " of " + keyNames[randomKey]+ "? : ";
 
         var correctAnswer = noteNames[(randomKey + randomNote) % 12];
-        const userAnswer = prompt(promptString.yellow);
+        const userAnswer = prompt(promptString.brightYellow);
 
-        if(userAnswer === correctAnswer) {
-            console.log("Correct!".green);
+        if(userAnswer === "exit") {
+            console.log(("\nYou got " + numCorrectAnswers + " / " + numQuestions + "!").rainbow);
+            process.exit();
+        } else if(userAnswer === correctAnswer) {
+            console.log("Correct!".brightGreen);
+            numCorrectAnswers++;
         } else {
-            console.log(("Wrong! It's " + correctAnswer).red);
+            console.log(("Wrong! It's " + correctAnswer).brightRed);
         }
-
+        numQuestions++;
     }
 }
