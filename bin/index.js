@@ -38,7 +38,7 @@ while(true) {
         " of " + keyNames[randomKey]+ "? : ";
     
     var correctAnswer = majorScales[randomKey][randomChord];
-    const userAnswer = prompt(promptString);
+    const userAnswer = prompt(promptString.yellow);
 
     if(userAnswer === correctAnswer) {
         console.log("Correct!".green);
