@@ -55,30 +55,14 @@ var numQuestions = 0;
 var numCorrectAnswers = 0;
 
 if(mode === "chords") {
-    while(true) {
-        var randomKey = Math.floor(Math.random() * 12);
-        var randomChord = Math.floor(Math.random() * 7);
-
-        var promptString = 
-            "What is the " + 
-            chordNumerals[randomChord] + 
-            " of " + keyNames[randomKey]+ "? : ";
-        
-        var correctAnswer = majorScales[randomKey][randomChord];
-        const userAnswer = prompt(promptString.brightYellow);
-
-        if(userAnswer === "exit") {
-            console.log("\nYou got " + numCorrectAnswers + " / " + numQuestions + "!");
-            process.exit();
-        } else if(userAnswer === correctAnswer) {
-            console.log("Correct!".brightGreen);
-            numCorrectAnswers++;
-        } else {
-            console.log(("Wrong! It's " + correctAnswer).brightRed);
-        }
-        numQuestions++;
-    }
+    runChords();
 } else if(mode == "scales") {
+    runScales();
+} else if(mode == "relatives") {
+    runRelativeKeys();
+}
+
+function runScales() {
     while(true) {
         var randomKey = Math.floor(Math.random() * 12);
         var randomNote = Math.floor(Math.random() * 12);
@@ -102,4 +86,54 @@ if(mode === "chords") {
         }
         numQuestions++;
     }
+}
+
+function runChords() {
+    while(true) {
+        var randomKey = Math.floor(Math.random() * 12);
+        var randomChord = Math.floor(Math.random() * 7);
+
+        var promptString = 
+            "What is the " + 
+            chordNumerals[randomChord] + 
+            " of " + keyNames[randomKey]+ "? : ";
+        
+        var correctAnswer = majorScales[randomKey][randomChord];
+        const userAnswer = prompt(promptString.brightYellow);
+
+        if(userAnswer === "exit") {
+            console.log("\nYou got " + numCorrectAnswers + " / " + numQuestions + "!");
+            process.exit();
+        } else if(userAnswer === correctAnswer) {
+            console.log("Correct!".brightGreen);
+            numCorrectAnswers++;
+        } else {
+            console.log(("Wrong! It's " + correctAnswer).brightRed);
+        }
+        numQuestions++;
+    }
+}
+
+function runRelativeKeys() {
+    while(true) {
+        var randomKey = Math.floor(Math.random() * 12);
+
+        var promptString = 
+            "What is the relative minor of " + keyNames[randomKey]+ "? : ";
+        
+        var correctAnswer = noteNames[(randomKey + 9) % 12];
+        const userAnswer = prompt(promptString.brightYellow);
+
+        if(userAnswer === "exit") {
+            console.log("\nYou got " + numCorrectAnswers + " / " + numQuestions + "!");
+            process.exit();
+        } else if(userAnswer === correctAnswer || userAnswer === (correctAnswer + "m")) {
+            console.log("Correct!".brightGreen);
+            numCorrectAnswers++;
+        } else {
+            console.log(("Wrong! It's " + correctAnswer).brightRed);
+        }
+        numQuestions++;
+    }
+
 }
